@@ -36,6 +36,9 @@
                                             <button type="submit" slot="toggler" class="btn">
                                                 {{_p('printer::pages.nodeprinter.options', 'Options')}}
                                             </button>
+                                            <cm-button @click="AWEMA._store.commit('setData', {param: 'testPrinter', data: col.data}); AWEMA.emit('modal::test_printer:open')">
+                                                {{_p('printer::pages.nodeprinter.test_print_page', 'Print a test page')}}
+                                            </cm-button>
                                             <cm-button @click="AWEMA._store.commit('setData', {param: 'editPrinter', data: col.data}); AWEMA.emit('modal::edit_printer:open')">
                                                 {{_p('printer::pages.nodeprinter.edit', 'Edit')}}
                                             </cm-button>
@@ -103,6 +106,14 @@
         <form-builder :edited="true" url="{{route('printer.nodeprinter.destroy') }}/{id}" method="delete"
                       @sended="AWEMA.emit('content::printers_table:update')"
                       send-text="{{ _p('printer::pages.nodeprinter.confirm', 'Confirm') }}" store-data="deletePrinter"
+                      disabled-dialog>
+
+        </form-builder>
+    </modal-window>
+
+    <modal-window name="test_printer" class="modal_formbuilder" title="{{  _p('printer::pages.nodeprinter.are_you_sure_print', 'Are you sure you want to print?') }}">
+        <form-builder :edited="true" url="{{route('printer.nodeprinter.test') }}/{id}" method="post"
+                      send-text="{{ _p('printer::pages.nodeprinter.confirm', 'Confirm') }}" store-data="testPrinter"
                       disabled-dialog>
 
         </form-builder>

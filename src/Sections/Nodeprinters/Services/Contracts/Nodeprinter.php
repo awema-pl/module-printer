@@ -1,7 +1,7 @@
 <?php
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Services\Contracts;
-use AwemaPL\Printer\Sections\Nodeprinters\Services\Validators\Validator;
+use Exception;
 use PrintNode\Request;
 
 interface Nodeprinter
@@ -11,6 +11,8 @@ interface Nodeprinter
      *
      * @param $apiKey
      * @return Request
+     * @throws Exception
      */
     public function request($apiKey);
+
 }

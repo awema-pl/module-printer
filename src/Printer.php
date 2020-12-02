@@ -115,6 +115,9 @@ class Printer implements PrinterContract
                 ->get('/select', '\AwemaPL\Printer\Sections\Nodeprinters\Http\Controllers\NodeprinterController@select')
                 ->name('select');
             $this->router
+                ->post('/test/{id?}', '\AwemaPL\Printer\Sections\Nodeprinters\Http\Controllers\NodeprinterController@test')
+                ->name('test');
+            $this->router
                 ->post('/', '\AwemaPL\Printer\Sections\Nodeprinters\Http\Controllers\NodeprinterController@store')
                 ->name('store');
             $this->router

@@ -11,4 +11,13 @@ interface Printable
      * @return string
      */
     public function getProviderName();
+
+    /**
+     * Print pdf
+     *
+     * @param $originalContent
+     * @param array $options
+     * @return mixed
+     */
+    public function printPdf($originalContent, $options = []);
 }

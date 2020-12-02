@@ -26,6 +26,8 @@ return [
         "edit_printer" => "Edit printer",
         "save" => "Save",
         "are_you_sure_delete" => "Are you sure delete?",
-        "confirm" => "Confirm"
+        "confirm" => "Confirm",
+        "test_print_page" => "Print a test page",
+        "are_you_sure_print" => "Are you sure you want to print?"
     ]
 ];

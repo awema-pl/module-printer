@@ -2,7 +2,6 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Http\Controllers;
 
-use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\SelectNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\StoreNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\UpdateNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Nodeprinter;
@@ -14,6 +13,7 @@ use AwemaPL\Printer\Sections\Printers\Exceptions\PrinterException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class NodeprinterController extends Controller
 {
@@ -110,6 +110,23 @@ class NodeprinterController extends Controller
         $this->authorize('isOwner', Nodeprinter::find($id));
         $this->nodeprinters->delete($id);
         return notify(_p('printer::notifies.nodeprinter.success_deleted_printer', 'Success deleted printer.'));
+    }
+
+    /**
+     * Test nodeprinter
+     *
+     * @param $id
+     * @return array
+     */
+    public function test($id)
+    {
+        $nodeprinter = Nodeprinter::find($id);
+        $this->authorize('isOwner', $nodeprinter);
+
+        $pdf = PDF::loadView('printer::sections.nodeprinters.test');
+        $content = $pdf->download()->getOriginalContent();
+        $nodeprinter->printPdf($content);
+        return notify(_p('printer::notifies.nodeprinter.please_check_printout_printer', 'Please check the printout from the printer.'));
     }
 
 }

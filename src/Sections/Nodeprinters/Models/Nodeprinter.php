@@ -7,6 +7,9 @@ use AwemaPL\Printer\Sections\Printers\Models\Printer;
 use betterapp\LaravelDbEncrypter\Traits\EncryptableDbAttribute;
 use Illuminate\Database\Eloquent\Model;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Contracts\Nodeprinter as NodeprinterContract;
+use AwemaPL\Printer\Sections\Nodeprinters\Services\Nodeprinter as NodeprinterService;
+use Illuminate\Support\Facades\Storage;
+use PrintNode\PrintJob;
 
 class Nodeprinter extends Model implements NodeprinterContract, Printable
 {
@@ -67,5 +70,26 @@ class Nodeprinter extends Model implements NodeprinterContract, Printable
     public function getProviderName()
     {
         return self::PROVIDER_NAME;
+    }
+
+    /**
+     * Print pdf
+     *
+     * @param $originalContent
+     * @param array $options
+     * @return mixed
+     * @throws \Exception
+     */
+    public function printPdf($originalContent, $options = [])
+    {
+        $service = new NodeprinterService();
+        $request = $service->request($this->api_key);
+        $printJob = new PrintJob();
+        $printJob->printer = $this->printer_id;
+        $printJob->contentType = 'pdf_base64';
+        $printJob->content = base64_encode($originalContent);
+        $printJob->source = $options['source'] ?? config('app.name');
+        $printJob->title =  $options['title'] ?? _p('printer::nodeprinter.no_title', 'No title');
+        return $request->post($printJob);
     }
 }
