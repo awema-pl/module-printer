@@ -4,6 +4,7 @@ namespace AwemaPL\Printer;
 
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Nodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Policies\NodeprinterPolicy;
+use AwemaPL\Printer\Sections\Printers\Policies\PrinterPolicy;
 use AwemaPL\Printer\Sections\Nodeprinters\Repositories\Contracts\NodeprinterRepository;
 use AwemaPL\Printer\Sections\Nodeprinters\Repositories\EloquentNodeprinterRepository;
 use AwemaPL\Printer\Sections\Nodeprinters\Services\Nodeprinter as NodeprinterService;
@@ -31,6 +32,7 @@ class PrinterServiceProvider extends AwemaProvider
      */
     protected $policies = [
         Nodeprinter::class => NodeprinterPolicy::class,
+        \AwemaPL\Printer\Sections\Printers\Models\Printer::class, PrinterPolicy::class,
     ];
 
     public function boot()
