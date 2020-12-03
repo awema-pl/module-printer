@@ -15,12 +15,12 @@ class EloquentPrinter extends JsonResource
      */
     public function toArray($request)
     {
-        /** @var Printable $printer */
-        $printer = new $this->printable();
+
         return [
             'id' => $this->id,
             'printable' => $this->printable,
-            'provider' =>  $printer->getProviderName(),
+            'provider' =>  $this->printable->getProviderName(),
+            'printer_name' => $this->printable->name,
             'created_at' =>$this->created_at->format('Y-m-d H:i:s'),
         ];
     }
