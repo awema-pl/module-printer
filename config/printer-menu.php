@@ -38,11 +38,11 @@ return [
         ],
         'adminSidebar' =>[
             [
-                'name' => 'Settings',
+                'name' => 'Printers',
                 'link' => '/admin/printer/settings',
                 'icon' => 'speed',
                 'permissions' => 'manage_printer_settings',
-                'key' => 'printer::menus.printer',
+                'key' => 'printer::menus.printers',
                 'children_top' => [
                     [
                         'name' => 'Settings',
