@@ -6,7 +6,6 @@ use AwemaPL\Printer\Sections\Nodeprinters\Services\Contracts\Nodeprinter as Node
 use Exception;
 use PrintNode\Credentials;
 use PrintNode\PrintJob;
-use PrintNode\Request;
 
 class Nodeprinter implements NodeprinterContract
 {
@@ -15,14 +14,14 @@ class Nodeprinter implements NodeprinterContract
      * Request
      *
      * @param $apiKey
-     * @return Request
+     * @return PrintnodeRequest
      * @throws Exception
      */
     public function request($apiKey)
     {
         $credentials = new Credentials();
         $credentials->setApiKey($apiKey);
-        return new Request($credentials);
+        return new PrintnodeRequest($credentials);
     }
 
 }
