@@ -2,10 +2,10 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Repositories;
 
+use AwemaPL\Printer\Exceptions\PrinterException;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Nodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Repositories\Contracts\NodeprinterRepository;
 use AwemaPL\Printer\Sections\Nodeprinters\Scopes\EloquentNodeprinterScopes;
-use AwemaPL\Printer\Sections\Printers\Exceptions\PrinterException;
 use AwemaPL\Printer\Sections\Printers\Repositories\Contracts\PrinterRepository;
 use AwemaPL\Repository\Eloquent\BaseRepository;
 use Illuminate\Support\Facades\Auth;

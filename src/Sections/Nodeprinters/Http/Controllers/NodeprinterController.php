@@ -2,6 +2,7 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Http\Controllers;
 
+use AwemaPL\Printer\Exceptions\PrinterException;
 use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\StoreNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\UpdateNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Nodeprinter;
@@ -9,7 +10,6 @@ use AwemaPL\Printer\Sections\Nodeprinters\Repositories\Contracts\NodeprinterRepo
 use AwemaPL\Printer\Sections\Nodeprinters\Resources\EloquentNodeprinter;
 use AwemaPL\Auth\Controllers\Traits\RedirectsTo;
 use AwemaPL\Printer\Sections\Nodeprinters\Services\KeyValidator;
-use AwemaPL\Printer\Sections\Printers\Exceptions\PrinterException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -80,7 +80,7 @@ class NodeprinterController extends Controller
     public function select(Request $request)
     {
         if (!KeyValidator::isValidApiKey($request->api_key)){
-            throw new PrinterException(_p('printer::notifies.nodeprinter.invalid_api_key', 'Invalid API key.'));
+            return $this->ajaxMessageError(_p('printer::notifies.nodeprinter.invalid_api_key', 'Invalid API key.'), 422);
         }
         return $this->ajax($this->nodeprinters->select($request->api_key));
     }

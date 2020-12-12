@@ -1,13 +1,13 @@
 <?php
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Services;
+use AwemaPL\Printer\Exceptions\PrinterException;
 use PrintNode\Computer;
 use PrintNode\Credentials;
 use PrintNode\Entity;
 use PrintNode\Printer;
 use PrintNode\PrintJob;
 use PrintNode\Request;
-use PrintNode\Response;
 
 /**
  * Request
@@ -208,10 +208,10 @@ class PrintnodeRequest extends Request
     {
         curl_setopt($curlHandle, CURLOPT_URL, $endPointUrl);
 
-        if (($response = @curl_exec($curlHandle)) === false) {
-            throw new \RuntimeException(
+        if (($response = curl_exec($curlHandle)) === false) {
+            throw new PrinterException(
                 sprintf(
-                    'cURL Error (%d): %s',
+                    'PrintNode API error. (%d): %s',
                     curl_errno($curlHandle),
                     curl_error($curlHandle)
                 )
