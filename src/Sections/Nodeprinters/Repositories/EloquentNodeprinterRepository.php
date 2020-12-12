@@ -2,7 +2,7 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Repositories;
 
-use AwemaPL\Printer\Exceptions\PrinterException;
+use AwemaPL\Printer\Exceptions\PrinterApiException;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Nodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Repositories\Contracts\NodeprinterRepository;
 use AwemaPL\Printer\Sections\Nodeprinters\Scopes\EloquentNodeprinterScopes;
@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use AwemaPL\Printer\Sections\Nodeprinters\Services\Contracts\Nodeprinter as NodeprinterService;
 use PrintNode\Printer;
 use PrintNode\Whoami;
+use InvalidArgumentException;
 
 class EloquentNodeprinterRepository extends BaseRepository implements NodeprinterRepository
 {
@@ -137,6 +138,6 @@ class EloquentNodeprinterRepository extends BaseRepository implements Nodeprinte
               ];
           }
       }
-      throw new PrinterException('Not found printer.');
+      throw new InvalidArgumentException("Not found printer for ID $printerId.");
     }
 }

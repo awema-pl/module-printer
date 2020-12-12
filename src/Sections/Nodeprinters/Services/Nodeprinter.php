@@ -2,7 +2,7 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Services;
 
-use AwemaPL\Printer\Exceptions\PrinterException;
+use AwemaPL\Printer\Exceptions\PrinterApiException;
 use AwemaPL\Printer\Sections\Nodeprinters\Services\Contracts\Nodeprinter as NodeprinterContract;
 use Exception;
 use PrintNode\Credentials;
@@ -16,7 +16,7 @@ class Nodeprinter implements NodeprinterContract
      *
      * @param $apiKey
      * @return PrintnodeRequest
-     * @throws PrinterException
+     * @throws PrinterApiException
      */
     public function request($apiKey)
     {

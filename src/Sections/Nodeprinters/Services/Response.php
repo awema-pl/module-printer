@@ -2,8 +2,8 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Services;
 
-use AwemaPL\Baselinker\Exceptions\BaselinkerException;
-use AwemaPL\Printer\Exceptions\PrinterException;
+use AwemaPL\Baselinker\Client\BaselinkerApiException;
+use AwemaPL\Printer\Exceptions\PrinterApiException;
 
 /**
  * Response
@@ -67,7 +67,7 @@ class Response
         if ($this->hasError()) {
             $message = $this->getDecodedContent()['message'] ?? $this->getStatus()['message'] ?? '';
             $code = $this->getDecodedContent()['code'] ??$this->getStatus()['code']??'';
-            throw new PrinterException('PrintNode API error. ' . $message, $code);
+            throw new PrinterApiException('PrintNode API error. ' . $message, $code);
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Http\Controllers;
 
-use AwemaPL\Printer\Exceptions\PrinterException;
+use AwemaPL\Printer\Exceptions\PrinterApiException;
 use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\StoreNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Http\Requests\UpdateNodeprinter;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Nodeprinter;

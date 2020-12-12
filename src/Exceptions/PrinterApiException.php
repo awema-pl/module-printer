@@ -2,7 +2,7 @@
 namespace AwemaPL\Printer\Exceptions;
 use Exception;
 
-class PrinterException extends Exception
+class PrinterApiException extends Exception
 {
     protected $errorCode;
 
