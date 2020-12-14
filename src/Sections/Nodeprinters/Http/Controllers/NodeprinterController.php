@@ -80,7 +80,7 @@ class NodeprinterController extends Controller
     public function select(Request $request)
     {
         if (!KeyValidator::isValidApiKey($request->api_key)){
-            return $this->ajaxMessageError(_p('printer::notifies.nodeprinter.invalid_api_key', 'Invalid API key.'), 422);
+            return $this->ajaxNotifyError(_p('printer::notifies.nodeprinter.invalid_api_key', 'Invalid API key.'), 422);
         }
         return $this->ajax($this->nodeprinters->select($request->api_key));
     }

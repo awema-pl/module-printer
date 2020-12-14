@@ -210,11 +210,7 @@ class PrintnodeRequest extends Request
 
         if (($response = curl_exec($curlHandle)) === false) {
             throw new PrinterApiException(
-                sprintf(
-                    'PrintNode API error. (%d): %s',
-                    curl_errno($curlHandle),
-                    curl_error($curlHandle)
-                )
+                'PrintNode API error.',PrinterApiException::ERROR_API_PRINTNODE, 409, null, null, sprintf('(%d): %s', curl_errno($curlHandle), curl_error($curlHandle))
             );
         }
 

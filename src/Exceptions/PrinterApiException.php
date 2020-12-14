@@ -1,19 +1,9 @@
 <?php
 namespace AwemaPL\Printer\Exceptions;
+use AwemaPL\BaseJS\Exceptions\PublicException;
 use Exception;
 
-class PrinterApiException extends Exception
+class PrinterApiException extends PublicException
 {
-    protected $errorCode;
-
-    public function __construct($message = '', $errorCode = '', Throwable $previous = null)
-    {
-        parent::__construct($message, 0, $previous);
-        $this->errorCode = $errorCode;
-    }
-
-    public function getErrorCode()
-    {
-        return $this->errorCode;
-    }
+    const ERROR_API_PRINTNODE = 'ERROR_API_PRINTNODE';
 }

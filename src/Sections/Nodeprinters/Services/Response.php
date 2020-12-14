@@ -65,9 +65,12 @@ class Response
         $this->headers = $headers;
         $this->content = $content;
         if ($this->hasError()) {
-            $message = $this->getDecodedContent()['message'] ?? $this->getStatus()['message'] ?? '';
-            $code = $this->getDecodedContent()['code'] ??$this->getStatus()['code']??'';
-            throw new PrinterApiException('PrintNode API error. ' . $message, $code);
+            $errorHttpStatus = (int) ($this->getStatus()['code'] ?? 409);
+            $errorSubCode = $this->getDecodedContent()['code'] ?? null;
+            $errorDetails = sprintf('%s. %s. (code: %s)', $this->getStatus()['message'] ?? '', $this->getDecodedContent()['message'] ?? '', $errorSubCode) ;
+            throw new PrinterApiException(
+                'PrintNode API error.',PrinterApiException::ERROR_API_PRINTNODE, $errorHttpStatus, null, null, $errorDetails
+            );
         }
     }
 
