@@ -6,8 +6,8 @@ use AwemaPL\Printer\PrintNode\Computer;
 use AwemaPL\Printer\PrintNode\Credentials;
 use AwemaPL\Printer\PrintNode\Entity;
 use AwemaPL\Printer\PrintNode\Printer;
-use PrintNode\PrintJob;
-use PrintNode\Request;
+use AwemaPL\Printer\PrintNode\PrintJob;
+use AwemaPL\Printer\PrintNode\Request;
 
 /**
  * Request
