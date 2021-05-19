@@ -1,13 +1,6 @@
 <?php
 
-namespace AwemaPL\Printer\Sections\Nodeprinters\Services;
-use AwemaPL\Printer\Exceptions\PrinterApiException;
-use AwemaPL\Printer\PrintNode\Computer;
-use AwemaPL\Printer\PrintNode\Credentials;
-use AwemaPL\Printer\PrintNode\Entity;
-use AwemaPL\Printer\PrintNode\Printer;
-use AwemaPL\Printer\PrintNode\PrintJob;
-use AwemaPL\Printer\PrintNode\Request;
+namespace AwemaPL\Printer\PrintNode;
 
 /**
  * Request
@@ -18,7 +11,7 @@ use AwemaPL\Printer\PrintNode\Request;
  * @method Printer[] getPrinters() getPrinters(int $printerId)
  * @method PrintJob[] getPrintJobs() getPrintJobs(int $printJobId)
  */
-class PrintnodeRequest extends Request
+class Request
 {
     /**
      * Credentials to use when communicating with API
@@ -189,9 +182,9 @@ class PrintnodeRequest extends Request
         curl_setopt($curlHandle, CURLOPT_USERPWD, (string)$this->credentials);
 
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
 
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT, 30);
+		curl_setopt($curlHandle, CURLOPT_TIMEOUT, 4);
 
         curl_setopt($curlHandle, CURLOPT_FOLLOWLOCATION, true);
 
@@ -208,13 +201,17 @@ class PrintnodeRequest extends Request
     {
         curl_setopt($curlHandle, CURLOPT_URL, $endPointUrl);
 
-        if (($response = curl_exec($curlHandle)) === false) {
-            throw new PrinterApiException(
-                'PrintNode API error.',PrinterApiException::ERROR_API_PRINTNODE, 409, null, null, sprintf('(%d): %s', curl_errno($curlHandle), curl_error($curlHandle))
+        if (($response = @curl_exec($curlHandle)) === false) {
+            throw new \RuntimeException(
+                sprintf(
+                    'cURL Error (%d): %s',
+                    curl_errno($curlHandle),
+                    curl_error($curlHandle)
+                )
             );
         }
 
-        curl_close($curlHandle);
+		curl_close($curlHandle);
 
         $response_parts = explode("\r\n\r\n", $response);
 
@@ -659,11 +656,11 @@ class PrintnodeRequest extends Request
 
         if (method_exists($entity, 'endPointUrlArg')) {
             $endPointUrl.= '/'.$entity->endPointUrlArg();
-        }
+		}
 
-        if (method_exists($entity, 'formatForPost')){
-            $entity = $entity->formatForPost();
-        }
+		if (method_exists($entity, 'formatForPost')){
+			$entity = $entity->formatForPost();
+		}
 
         return $this->curlSend('POST', $entity, $endPointUrl);
     }

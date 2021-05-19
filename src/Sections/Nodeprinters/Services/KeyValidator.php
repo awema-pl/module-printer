@@ -3,8 +3,8 @@
 namespace AwemaPL\Printer\Sections\Nodeprinters\Services;
 
 use Exception;
-use PrintNode\Credentials;
-use PrintNode\Request;
+use AwemaPL\Printer\PrintNode\Credentials;
+use AwemaPL\Printer\PrintNode\Request;
 
 class KeyValidator
 {
@@ -15,9 +15,8 @@ class KeyValidator
      */
     public static function isValidApiKey($apiKey){
         try {
-            $credentials = new \PrintNode\Credentials\ApiKey($apiKey);
-            $client = new \PrintNode\Client($credentials);
-            $computers = $client->viewComputers();
+            $request = (new Nodeprinter())->request($apiKey);
+            $request->getPrintJobStates();
             return true;
         } catch (Exception $e){
             return false;

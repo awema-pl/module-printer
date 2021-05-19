@@ -2,7 +2,7 @@
 
 namespace AwemaPL\Printer\Sections\Nodeprinters\Services\Contracts;
 use Exception;
-use PrintNode\Request;
+use AwemaPL\Printer\PrintNode\Request;
 
 interface Nodeprinter
 {

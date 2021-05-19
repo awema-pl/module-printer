@@ -10,8 +10,8 @@ use AwemaPL\Printer\Sections\Printers\Repositories\Contracts\PrinterRepository;
 use AwemaPL\Repository\Eloquent\BaseRepository;
 use Illuminate\Support\Facades\Auth;
 use AwemaPL\Printer\Sections\Nodeprinters\Services\Contracts\Nodeprinter as NodeprinterService;
-use PrintNode\Printer;
-use PrintNode\Whoami;
+use AwemaPL\Printer\PrintNode\Printer;
+use AwemaPL\Printer\PrintNode\Whoami;
 use InvalidArgumentException;
 
 class EloquentNodeprinterRepository extends BaseRepository implements NodeprinterRepository
