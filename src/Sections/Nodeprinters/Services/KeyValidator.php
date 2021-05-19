@@ -15,8 +15,9 @@ class KeyValidator
      */
     public static function isValidApiKey($apiKey){
         try {
-            $request = (new Nodeprinter())->request($apiKey);
-            $request->getPrintJobStates();
+            $credentials = new \PrintNode\Credentials\ApiKey($apiKey);
+            $client = new \PrintNode\Client($credentials);
+            $computers = $client->viewComputers();
             return true;
         } catch (Exception $e){
             return false;

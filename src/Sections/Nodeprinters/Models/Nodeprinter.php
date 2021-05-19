@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use AwemaPL\Printer\Sections\Nodeprinters\Models\Contracts\Nodeprinter as NodeprinterContract;
 use AwemaPL\Printer\Sections\Nodeprinters\Services\Nodeprinter as NodeprinterService;
 use Illuminate\Support\Facades\Storage;
-use PrintNode\PrintJob;
+use PrintNode\Entity\PrintJob;
 
 class Nodeprinter extends Model implements NodeprinterContract, Printable
 {
@@ -82,14 +82,16 @@ class Nodeprinter extends Model implements NodeprinterContract, Printable
      */
     public function printPdf($originalContent, $options = [])
     {
-        $service = new NodeprinterService();
-        $request = $service->request($this->api_key);
-        $printJob = new PrintJob();
+        $credentials = new \PrintNode\Credentials\ApiKey($this->api_key);
+        $client = new \PrintNode\Client($credentials);
+//        $service = new NodeprinterService();
+//        $request = $service->request($this->api_key);
+        $printJob = new PrintJob($client);
         $printJob->printer = $this->printer_id;
         $printJob->contentType = 'pdf_base64';
         $printJob->content = base64_encode($originalContent);
         $printJob->source = $options['source'] ?? config('app.name');
         $printJob->title =  $options['title'] ?? _p('printer::nodeprinter.no_title', 'No title');
-        return $request->post($printJob);
+        return $client->createPrintJob($printJob);
     }
 }
