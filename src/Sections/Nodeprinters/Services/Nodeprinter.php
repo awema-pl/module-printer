@@ -20,7 +20,7 @@ class Nodeprinter implements NodeprinterContract
      */
     public function request($apiKey)
     {
-        $credentials = new Credentials();
+        $credentials = new NodeprintCredentials();
         $credentials->setApiKey($apiKey);
         return new PrintnodeRequest($credentials);
     }
