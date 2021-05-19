@@ -46,15 +46,15 @@ class Request
      */
 
     private $endPointUrls = array(
-        'PrintNode\Client' => '/download/clients',
-        'PrintNode\Download' => '/download/client',
-        'PrintNode\ApiKey' => '/account/apikey',
-        'PrintNode\Account' => '/account',
-        'PrintNode\Tag' => '/account/tag',
-        'PrintNode\Whoami' => '/whoami',
-        'PrintNode\Computer' => '/computers',
-        'PrintNode\Printer' => '/printers',
-        'PrintNode\PrintJob' => '/printjobs',
+        'AwemaPL\Printer\PrintNode\Client' => '/download/clients',
+        'AwemaPL\Printer\PrintNode\Download' => '/download/client',
+        'AwemaPL\Printer\PrintNode\ApiKey' => '/account/apikey',
+        'AwemaPL\Printer\PrintNode\Account' => '/account',
+        'AwemaPL\Printer\PrintNode\Tag' => '/account/tag',
+        'AwemaPL\Printer\PrintNode\Whoami' => '/whoami',
+        'AwemaPL\Printer\PrintNode\Computer' => '/computers',
+        'AwemaPL\Printer\PrintNode\Printer' => '/printers',
+        'AwemaPL\Printer\PrintNode\PrintJob' => '/printjobs',
     );
 
     /**
@@ -62,15 +62,15 @@ class Request
      * @var string[]
      */
     private $methodNameEntityMap = array(
-        'Clients' => 'PrintNode\Client',
-        'Downloads' => 'PrintNode\Download',
-        'ApiKeys' => 'PrintNode\ApiKey',
-        'Account' => 'PrintNode\Account',
-        'Tags' => 'PrintNode\Tag',
-        'Whoami' => 'PrintNode\Whoami',
-        'Computers' => 'PrintNode\Computer',
-        'Printers' => 'PrintNode\Printer',
-        'PrintJobs' => 'PrintNode\PrintJob',
+        'Clients' => 'AwemaPL\Printer\PrintNode\Client',
+        'Downloads' => 'AwemaPL\Printer\PrintNode\Download',
+        'ApiKeys' => 'AwemaPL\Printer\PrintNode\ApiKey',
+        'Account' => 'AwemaPL\Printer\PrintNode\Account',
+        'Tags' => 'AwemaPL\Printer\PrintNode\Tag',
+        'Whoami' => 'AwemaPL\Printer\PrintNode\Whoami',
+        'Computers' => 'AwemaPL\Printer\PrintNode\Computer',
+        'Printers' => 'AwemaPL\Printer\PrintNode\Printer',
+        'PrintJobs' => 'AwemaPL\Printer\PrintNode\PrintJob',
     );
 
     /**
@@ -437,7 +437,7 @@ class Request
             );
         }
 
-        return Entity::makeFromResponse("PrintNode\State", json_decode($response->getContent()));
+        return Entity::makeFromResponse("AwemaPL\Printer\PrintNode\State", json_decode($response->getContent()));
     }
 
 
@@ -481,7 +481,7 @@ class Request
             );
         }
 
-        return Entity::makeFromResponse("PrintNode\PrintJob", json_decode($response->getContent()));
+        return Entity::makeFromResponse("AwemaPL\Printer\PrintNode\PrintJob", json_decode($response->getContent()));
     }
 
     /**
@@ -508,7 +508,7 @@ class Request
             );
         }
 
-        return Entity::makeFromResponse("PrintNode\Scale", json_decode($response->getContent()));
+        return Entity::makeFromResponse("AwemaPL\Printer\PrintNode\Scale", json_decode($response->getContent()));
     }
 
     /**
@@ -551,7 +551,7 @@ class Request
             );
         }
 
-        return Entity::makeFromResponse("PrintNode\Printer", json_decode($response->getContent()));
+        return Entity::makeFromResponse("AwemaPL\Printer\PrintNode\Printer", json_decode($response->getContent()));
     }
 
     /**

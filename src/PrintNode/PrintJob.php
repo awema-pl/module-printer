@@ -35,7 +35,7 @@ class PrintJob extends Entity
     public function foreignKeyEntityMap()
     {
         return array(
-            'printer' => 'PrintNode\Printer'
+            'printer' => 'AwemaPL\Printer\PrintNode\Printer'
         );
     }
 }
